@@ -1,4 +1,73 @@
 .home {
+    position: relative;
+    z-index: 0;
+    background-color: #000;
     text-align: center;
+    color: #fff;
+
     padding: 20px;
+
+    .intro {
+        margin-bottom: 20px;
+        animation: fadeIn 5s;
+
+        .name {
+            font-size: 2.5em;
+            color: #00f;
+        }
+
+        .title {
+            font-size: 2em;
+            color: #0f0;
+        }
+
+        .description {
+            font-size: 1.5em;
+        }
+    }
+
+    .skills,
+    .contact,
+    .links {
+        margin-bottom: 20px;
+
+        h3 {
+            font-size: 2em;
+            color: #00f;
+        }
+
+        p {
+            font-size: 1.5em;
+        }
+    }
+
+    a {
+        color: #0f0;
+        transition: color 0.5s;
+
+        &:hover {
+            color: #00f;
+        }
+    }
+
+    @media (max-width: 600px) {
+        padding: 10px;
+
+        .name, .title {
+            font-size: 1.5em;
+        }
+
+        .description, h3, p {
+            font-size: 1em;
+        }
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
 }
