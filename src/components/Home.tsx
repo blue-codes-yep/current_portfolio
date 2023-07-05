@@ -11,7 +11,7 @@ function Home() {
                 I'm a software engineer with the ability to pick up new languages and technologies as needed, and with a focus on fast, responsive, and intuitive code. Forever learning, and moving forward with my passion for technology, as well as the advancement of my skills in all aspects.
             </p>
             <p>
-                <strong>Software Development Skills:</strong> JavaScript, Python, Flask, Pandas, Numpy, Langchain, LLM’s, Node.js, React, Express, RESTful API, PostgreSQL, NLP’s, Selenium, Beautiful Soup, Playwright, Material UI, Bootstrap, Flexbox, Heroku, AWS, NGNIX, HTML, CSS
+                <strong>Software Development Skills:</strong> JavaScript, Python, Flask, Pandas, Numpy, Langchain, LLMs, Node.js, React, Express, RESTful API, PostgreSQL, NLPs, Selenium, Beautiful Soup, Playwright, Material UI, Bootstrap, Flexbox, Heroku, AWS, NGNIX, HTML, CSS
             </p>
             <p>
                 <strong>Contact:</strong> blue.codes.eng@gmail.com
