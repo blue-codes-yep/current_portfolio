@@ -44,8 +44,8 @@
 
         .name {
             margin-bottom: 10px;
-            margin-left: 10px;
-            font-size: 2.5em;
+            margin-right: 80px;
+            font-size: 2em;
             color: rgb(19, 30, 92);
             animation: moveToLeft 5s;
             animation-fill-mode: forwards;
@@ -53,8 +53,7 @@
         
 
         .title {
-            font-size: 2em;
-            margin-left: 115px;
+            margin-left: 60px;
             animation: moveToLeft 5s;
             animation-fill-mode: forwards;
             color: rgb(24, 85, 42);
@@ -71,20 +70,19 @@
     .skills{    
         margin-right: 510px;
     };
-    .contact,
+    .contact{
+        font-size: 1em;
+        margin-left: 95px;
+    }
     .links {
-        margin-bottom: 20px;
-
-        h3 {
-            font-size: 2em;
-            color: #00f;
-        }
-
         p {
-            font-size: 1.5em;
+            font-size: 1.1em;
+            margin-left: 115px;
         }
     }
-
+    .links { 
+        margin-right: 35px;
+    }
     a {
         color: #0f0;
         transition: color 0.5s;
