@@ -1,7 +1,12 @@
-import React from 'react';
+import { Text } from 'troika-three-text'
+import { Canvas, extend } from '@react-three/fiber';
+import PixelatedElement from './PixelatedElement';
 import styles from '../styles/Home.module.scss';
 import Loader from './Loader';
+import TroikaText from './TrokiaText';
 import { motion } from 'framer-motion';
+
+extend({ Text });
 
 function Home() {
     return (
@@ -17,8 +22,14 @@ function Home() {
                     animate={{ x: "-330%" }}
                     transition={{ duration: 1 }}
                 >
-                    <motion.h1 className={styles.name}>Blue</motion.h1>
-                    <motion.h2 className={styles.title}>Software Engineer</motion.h2>
+                    <motion.h1 className={styles.name}
+                        initial={{ y: 0, x: 0 }}
+                        animate={{ y: "35%", x: "-94%" }}
+                        transition={{ duration: 5 }}>Blue</motion.h1>
+                    <motion.h2 className={styles.title}
+                        initial={{ y: 0, x: 0 }}
+                        animate={{ y: "-55%", x: "5%" }}
+                        transition={{ duration: 5 }}>Software Engineer</motion.h2>
                 </motion.div>
                 <motion.div className={styles.d_skill}
                     initial={{ x: 0 }}
@@ -26,23 +37,23 @@ function Home() {
                     transition={{ duration: 5 }}
                 >
                     <motion.p className={styles.description}
-                    initial={{ x: 0 }}
-                    animate={{ x: "50%" }}
-                    transition={{ duration: 5 }}
+                        initial={{ x: 0 }}
+                        animate={{ x: "50%" }}
+                        transition={{ duration: 5 }}
                     >
                         I'm a software engineer with the ability to pick up new languages and technologies as needed, and with a focus on fast, responsive, and intuitive code. Forever learning, and moving forward with my passion for technology, as well as the advancement of my skills in all aspects.
                     </motion.p>
                     <motion.div className={styles.skills}
-                                        initial={{ x: 0 }}
-                                        animate={{y: "45%", x: "48%" }}
-                                        transition={{ duration: 5 }}>
+                        initial={{ x: 0 }}
+                        animate={{ y: "45%", x: "50%" }}
+                        transition={{ duration: 5 }}>
                         <motion.h3>Software Development Skills:</motion.h3>
                         <motion.p>JavaScript, Python, Flask, Pandas, Numpy, Langchain, LLMs, Node.js, React, Express, RESTful API, PostgreSQL, NLPs, Selenium, Beautiful Soup, Playwright, Material UI, Bootstrap, Flexbox, Heroku, AWS, NGNIX, HTML, CSS</motion.p>
                     </motion.div>
                 </motion.div>
                 <motion.div className={styles.footer}
                     initial={{ y: 0, x: 0 }}
-                    animate={{ y: "-245%", x: "-41%" }}
+                    animate={{ y: "-350%", x: "-44.5%" }}
                     transition={{ duration: 5 }}
                 >
                     <motion.div className={styles.contact}>
@@ -53,6 +64,12 @@ function Home() {
                     </motion.div>
                 </motion.div>
             </motion.div>
+            <Canvas>
+                <TroikaText text="blue.codes.eng@gmail.com" position={-2} />
+                <TroikaText text="bluecodes.dev | GitHub" position={-2} />
+            </Canvas>
+
+
         </motion.div>
     );
 }

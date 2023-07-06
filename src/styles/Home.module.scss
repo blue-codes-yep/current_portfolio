@@ -12,7 +12,6 @@
         justify-content: center;
         align-items: center;
         margin: 0 auto;
-        overflow: hidden;
         animation: fadeIn 5s;
         z-index: -1;
     }
@@ -36,12 +35,12 @@
     .name {
         margin-bottom: 1%;
         font-size: 2.5em;
-        color: rgb(19, 30, 92);
+        color: #07456f;
     }
 
     .title {
         font-size: 2em;
-        color: rgb(24, 85, 42);
+        color: #044b2e;
     }
 
     .description {
@@ -55,8 +54,6 @@
     }
     .contact,
     .links {
-        margin-bottom: 2%;
-
         h3 {
             font-size: 2em;
             color: #00f;
