@@ -1,21 +1,58 @@
-import { Text } from 'troika-three-text'
-import { Canvas, extend } from '@react-three/fiber';
-import PixelatedElement from './PixelatedElement';
+import React, { startTransition, useRef, useState, Suspense, useEffect } from 'react';
+
+import { Canvas} from '@react-three/fiber';
+import WebGLContextHandler from './webgl-context-handler';
 import styles from '../styles/Home.module.scss';
 import Loader from './Loader';
-import TroikaText from './TrokiaText';
+
+import TextTexture from './TextTexture';
 import { motion } from 'framer-motion';
 
-extend({ Text });
-
 function Home() {
+    const [isPending, setIsPending] = useState(true);
+    const footerRef = useRef(null);
+    const skillRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                console.log('Intersection detected:', entry.isIntersecting); // Debug log
+                if (entry.isIntersecting) {
+                    handlePendingStateChange(false);
+                } else {
+                    handlePendingStateChange(true);
+                }
+            },
+            { root: skillRef.current }
+        );
+
+        if (footerRef.current) {
+            observer.observe(footerRef.current);
+        }
+
+        return () => {
+            if (footerRef.current) {
+                observer.unobserve(footerRef.current);
+            }
+        };
+    }, []);
+
+    function handlePendingStateChange(nextState: boolean) {
+        console.log('Changing state to:', nextState); // Debug log
+        startTransition(() => {
+            setIsPending(nextState);
+        });
+    }
+
     return (
         <motion.div className={styles.home}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 5 }}
         >
-            <Loader />
+            <Suspense fallback={<div>Loading...</div>}>
+                {isPending ? <Loader /> : null}
+            </Suspense>
             <motion.div className={styles.intro}>
                 <motion.div className={styles.profile}
                     initial={{ x: 0 }}
@@ -43,7 +80,7 @@ function Home() {
                     >
                         I'm a software engineer with the ability to pick up new languages and technologies as needed, and with a focus on fast, responsive, and intuitive code. Forever learning, and moving forward with my passion for technology, as well as the advancement of my skills in all aspects.
                     </motion.p>
-                    <motion.div className={styles.skills}
+                    <motion.div ref={skillRef} className={styles.skills}
                         initial={{ x: 0 }}
                         animate={{ y: "45%", x: "50%" }}
                         transition={{ duration: 5 }}>
@@ -51,7 +88,7 @@ function Home() {
                         <motion.p>JavaScript, Python, Flask, Pandas, Numpy, Langchain, LLMs, Node.js, React, Express, RESTful API, PostgreSQL, NLPs, Selenium, Beautiful Soup, Playwright, Material UI, Bootstrap, Flexbox, Heroku, AWS, NGNIX, HTML, CSS</motion.p>
                     </motion.div>
                 </motion.div>
-                <motion.div className={styles.footer}
+                <motion.div ref={footerRef} className={styles.footer}
                     initial={{ y: 0, x: 0 }}
                     animate={{ y: "-350%", x: "-44.5%" }}
                     transition={{ duration: 5 }}
@@ -65,11 +102,12 @@ function Home() {
                 </motion.div>
             </motion.div>
             <Canvas>
-                <TroikaText text="blue.codes.eng@gmail.com" position={-2} />
-                <TroikaText text="bluecodes.dev | GitHub" position={-2} />
+                <ambientLight />
+                <WebGLContextHandler />
+                <Suspense fallback={null}>
+                    <TextTexture text="blue.codes.eng@gmail.com" />
+                </Suspense>
             </Canvas>
-
-
         </motion.div>
     );
 }

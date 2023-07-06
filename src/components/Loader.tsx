@@ -9,12 +9,12 @@ function Loader() {
         const handleClick = (event: MouseEvent) => {
             setIsClicked(true);
             setPosition({ x: event.clientX, y: event.clientY });
-            setTimeout(() => setIsClicked(false), 3000); // Reset after 3 seconds
+            setTimeout(() => setIsClicked(false), 3000); 
         };
 
         window.addEventListener('click', handleClick);
 
-        // Clean up event listener on component unmount
+
         return () => {
             window.removeEventListener('click', handleClick);
         };
