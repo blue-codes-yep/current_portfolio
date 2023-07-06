@@ -1,10 +1,7 @@
 import React, { startTransition, useRef, useState, Suspense, useEffect } from 'react';
-
-import { Canvas} from '@react-three/fiber';
-import WebGLContextHandler from './webgl-context-handler';
+import { Canvas } from '@react-three/fiber';
 import styles from '../styles/Home.module.scss';
 import Loader from './Loader';
-
 import TextTexture from './TextTexture';
 import { motion } from 'framer-motion';
 
@@ -103,7 +100,6 @@ function Home() {
             </motion.div>
             <Canvas>
                 <ambientLight />
-                <WebGLContextHandler />
                 <Suspense fallback={null}>
                     <TextTexture text="blue.codes.eng@gmail.com" />
                 </Suspense>
