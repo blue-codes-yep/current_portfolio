@@ -1,14 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Text } from '@react-three/drei';
-import { TextShaderMaterial } from './TextShaderMaterial'; // adjust the path as needed
+import { TextShaderMaterial } from './TextShaderMaterial';
 
 interface TextTextureProps {
     text: string;
-    // Add any other props you need for the Text component here
     color?: string;
     fontSize?: number;
-    // etc.
 }
 
 function TextTexture({ text, ...props }: TextTextureProps) {

@@ -101,7 +101,7 @@ function Home() {
             <Canvas>
                 <ambientLight />
                 <Suspense fallback={null}>
-                    <TextTexture text="blue.codes.eng@gmail.com" />
+                    <TextTexture text="blue.codes.eng@gmail.com"/>
                 </Suspense>
             </Canvas>
         </motion.div>
