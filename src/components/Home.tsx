@@ -1,9 +1,10 @@
 import React, { startTransition, useRef, useState, Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
+import { motion } from 'framer-motion';
 import styles from '../styles/Home.module.scss';
 import Loader from './Loader';
 import TextTexture from './TextTexture';
-import { motion } from 'framer-motion';
+import ParticleSystem from './ParticleSystem';
 
 function Home() {
     const [isPending, setIsPending] = useState(true);
@@ -102,6 +103,7 @@ function Home() {
                 <ambientLight />
                 <Suspense fallback={null}>
                     <TextTexture text="blue.codes.eng@gmail.com"/>
+                    <ParticleSystem text="blue.codes.eng@gmail.com"/>
                 </Suspense>
             </Canvas>
         </motion.div>
