@@ -28,7 +28,7 @@ const TextShader = {
       return fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);
     }
     
-  void main() {
+    void main() {
       vec4 texColor = texture2D(textTexture, vUv);
       vec3 color = texColor.rgb;
   

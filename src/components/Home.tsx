@@ -1,46 +1,19 @@
 import React, { startTransition, useRef, useState, Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
 import { motion } from 'framer-motion';
 import styles from '../styles/Home.module.scss';
-import Loader from './Loader';
+import Menu from './Menu';
 import TextTexture from './TextTexture';
-
+import Particles from './Particles';
 
 function Home() {
-    const [isPending, setIsPending] = useState(true);
     const footerRef = useRef(null);
     const skillRef = useRef(null);
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                console.log('Intersection detected:', entry.isIntersecting); // Debug log
-                if (entry.isIntersecting) {
-                    handlePendingStateChange(false);
-                } else {
-                    handlePendingStateChange(true);
-                }
-            },
-            { root: skillRef.current }
-        );
 
-        if (footerRef.current) {
-            observer.observe(footerRef.current);
-        }
-
-        return () => {
-            if (footerRef.current) {
-                observer.unobserve(footerRef.current);
-            }
-        };
-    }, []);
-
-    function handlePendingStateChange(nextState: boolean) {
-        console.log('Changing state to:', nextState); // Debug log
-        startTransition(() => {
-            setIsPending(nextState);
-        });
-    }
-
+    const handleProjectClick = () => {
+        console.log('Project clicked');
+    };
 
     return (
         <motion.div className={styles.home}
@@ -48,9 +21,7 @@ function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 5 }}
         >
-            <Suspense fallback={<div>Loading...</div>}>
-                {isPending ? <Loader /> : null}
-            </Suspense>
+            <Menu onProjectClick={handleProjectClick} />
             <motion.div className={styles.intro}>
                 <motion.div className={styles.profile}
                     initial={{ x: 0 }}
@@ -88,7 +59,7 @@ function Home() {
                 </motion.div>
                 <motion.div ref={footerRef} className={styles.footer}
                     initial={{ y: 0, x: 0 }}
-                    animate={{ y: "-350%", x: "-44.5%" }}
+                    animate={{ y: "-350%", x: "-44%" }}
                     transition={{ duration: 5 }}
                 >
                     <motion.div className={styles.contact}>
@@ -99,10 +70,11 @@ function Home() {
                     </motion.div>
                 </motion.div>
             </motion.div>
-            <Canvas>
+            <Canvas style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}>
                 <ambientLight />
+                <Particles count={5000} />
                 <Suspense fallback={null}>
-                <TextTexture text="blue.codes.eng@gmail.com" fontSize={2} color="#5024FF" />
+                    {/* Will maybe revist animating text manually later <TextTexture text="blue.codes.eng@gmail.com" fontSize={2} color="#5024FF" /> */}
                 </Suspense>
             </Canvas>
         </motion.div>
