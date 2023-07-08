@@ -102,7 +102,7 @@ function Home() {
             <Canvas>
                 <ambientLight />
                 <Suspense fallback={null}>
-                <TextTexture text="blue.codes.eng@gmail.com" fontSize={1} />
+                <TextTexture text="blue.codes.eng@gmail.com" fontSize={2} color="#5024FF" />
                 </Suspense>
             </Canvas>
         </motion.div>

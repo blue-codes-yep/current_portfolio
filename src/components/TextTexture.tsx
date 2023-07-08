@@ -19,13 +19,13 @@ interface TextTextureProps {
     fontSize?: number;
 }
 
-function TextTexture({ text, fontSize = 1, ...props }: TextTextureProps) {
+function TextTexture({ text, color = '#FFFFFF', fontSize = 1, ...props }: TextTextureProps) {
     const font = useFont('/fonts/Belanosima_Regular.json');
-    const geometry = font ? new TextGeometry(text, { font, size: fontSize, height: 0.2 }) : null;
+    const geometry = font ? new TextGeometry(text, { font, size: fontSize, height: 0.4 }) : null;
 
     return geometry ? (
         <mesh geometry={geometry} {...props}>
-            <TextMaterial text={text} />
+            <TextMaterial text={text} color={color} />
         </mesh>
     ) : null;
 }

@@ -8,10 +8,11 @@ import TextShader from './TextShader';
 
 interface TextMaterialProps {
     text: string;
+    color?: string;
     children?: (font: Font) => React.ReactNode;
 }
 
-function TextMaterial({ text, children }: TextMaterialProps) {
+function TextMaterial({ text, color = '#FFFFFF', children }: TextMaterialProps) { // Set a default color
     const { gl, size } = useThree();
     const fontLoader = new FontLoader();
     const materialRef = useRef<THREE.ShaderMaterial>(null);
@@ -19,12 +20,11 @@ function TextMaterial({ text, children }: TextMaterialProps) {
 
     useEffect(() => {
         fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
-            console.log(font);
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, size.width / size.height, 0.1, 1000);
             camera.position.z = 1;
             const geometry = new TextGeometry(text, { font, size: 0.5, height: 0.2 });
-            const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+            const material = new THREE.MeshBasicMaterial({ color: new THREE.Color(color) }); // Use the color prop
             const mesh = new THREE.Mesh(geometry, material);
             scene.add(mesh);
             gl.setRenderTarget(target);
@@ -37,8 +37,7 @@ function TextMaterial({ text, children }: TextMaterialProps) {
                 children(font);
             }
         });
-    }, [text, gl, size.width, size.height, children]);
-
+    }, [text, gl, size.width, size.height, children, color]); // Add color to the dependencies array
 
     useFrame(({ clock }) => {
         if (materialRef.current) {
