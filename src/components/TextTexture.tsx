@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
-import { Text } from '@react-three/drei';
-import { TextShaderMaterial } from './TextShaderMaterial';
+import * as THREE from 'three';
+import { useThree } from '@react-three/fiber';
+import TextMaterial from './TextMaterial';
+import { TextGeometry } from '../utils/TextGeometry';
 
 interface TextTextureProps {
     text: string;
@@ -9,26 +9,22 @@ interface TextTextureProps {
     fontSize?: number;
 }
 
-function TextTexture({ text, ...props }: TextTextureProps) {
-    const meshRef = useRef<THREE.Mesh>(null);
-
-    useEffect(() => {
-        if (meshRef.current) {
-            meshRef.current.material = TextShaderMaterial;
-        }
-    }, []);
-
-    useFrame(({ clock }) => {
-        if (TextShaderMaterial.uniforms.time) {
-            TextShaderMaterial.uniforms.time.value = clock.getElapsedTime();
-        }
-    });
-
+function TextTexture({ text, fontSize = 1 }: TextTextureProps) {
+    const { scene } = useThree();
+    console.log(scene);
     return (
-        <Text ref={meshRef} {...props}>
-            {text}
-        </Text>
+
+        <TextMaterial text={text}>
+            {(font) => {
+                const textGeometry = new TextGeometry(text, { font, size: fontSize, height: 0.2 });
+                return (
+                    <mesh geometry={textGeometry} />
+                );
+            }}
+        </TextMaterial>
     );
 }
+
+
 
 export default TextTexture;

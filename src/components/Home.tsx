@@ -4,13 +4,12 @@ import { motion } from 'framer-motion';
 import styles from '../styles/Home.module.scss';
 import Loader from './Loader';
 import TextTexture from './TextTexture';
-import ParticleSystem from './ParticleSystem';
+
 
 function Home() {
     const [isPending, setIsPending] = useState(true);
     const footerRef = useRef(null);
     const skillRef = useRef(null);
-
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
@@ -41,6 +40,7 @@ function Home() {
             setIsPending(nextState);
         });
     }
+
 
     return (
         <motion.div className={styles.home}
@@ -102,8 +102,7 @@ function Home() {
             <Canvas>
                 <ambientLight />
                 <Suspense fallback={null}>
-                    <TextTexture text="blue.codes.eng@gmail.com"/>
-                    <ParticleSystem text="blue.codes.eng@gmail.com"/>
+                <TextTexture text="blue.codes.eng@gmail.com" fontSize={1} />
                 </Suspense>
             </Canvas>
         </motion.div>
