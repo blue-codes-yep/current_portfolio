@@ -18,7 +18,7 @@ function TextMaterial({ text, children }: TextMaterialProps) {
     const target = new WebGLRenderTarget(size.width, size.height, { minFilter: LinearFilter, magFilter: LinearFilter, format: RGBAFormat });
 
     useEffect(() => {
-        fontLoader.load('/fonts/Belanosima_Regular.json', (font) => {
+        fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
             console.log(font);
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, size.width / size.height, 0.1, 1000);

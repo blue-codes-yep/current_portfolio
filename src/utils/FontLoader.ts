@@ -4,6 +4,7 @@ import {
     LoadingManager,
     ShapePath
 } from 'three';
+import * as THREE from 'three';
 
 interface Glyph {
     o: string;
@@ -20,26 +21,32 @@ interface FontData {
 }
 
 class FontLoader extends Loader {
+    manager: LoadingManager;
 
     constructor(manager?: LoadingManager) {
-        super(manager);
+        super();
+        this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
     }
 
-    load(url: string, onLoad: (arg0: Font) => void, onProgress?: (request: ProgressEvent<EventTarget>) => void, onError?: (event: ErrorEvent) => void) {
-        const scope = this;
-
+    load(url: string, onLoad: (font: Font) => void, onProgress?: (event: ProgressEvent) => void, onError?: (event: ErrorEvent) => void): void {
         const loader = new FileLoader(this.manager);
-        loader.setPath(this.path);
-        loader.setRequestHeader(this.requestHeader);
-        loader.setWithCredentials(this.withCredentials);
-        loader.load(url, function (text) {
-            const font = scope.parse(JSON.parse(text as string));
-            if (onLoad) onLoad(font);
+        loader.load(url, (text: string | ArrayBuffer) => {
+            if (typeof text === 'string') {
+                onLoad(this.parse(JSON.parse(text)));
+            } else {
+                onError?.(new ErrorEvent('Failed to load font: expected a string response.'));
+            }
         }, onProgress, onError);
     }
 
-    parse(json: any) {
+    parse(json: any): Font {
         return new Font(json);
+    }
+
+    loadAsync(url: string): Promise<Font> {
+        return new Promise((resolve, reject) => {
+            this.load(url, resolve, undefined, reject);
+        });
     }
 }
 
