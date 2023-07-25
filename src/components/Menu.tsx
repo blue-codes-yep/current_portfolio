@@ -1,88 +1,32 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import styles from '../styles/Menu.module.scss';
+import MenuItem from './MenuItem';
+import Projects from './Projects';
 
 interface MenuProps {
-    onProjectClick: () => void;
+    onProjectClick: (project: {name: string, description: string, image: string, link: string}) => void;
+    onHideDescription: () => void;
 }
 
-const Menu: React.FC<MenuProps> = ({ onProjectClick }) => {
+const Menu: React.FC<MenuProps> = ({ onProjectClick, onHideDescription }) => {
     const [isProjectsOpen, setIsProjectsOpen] = useState(false);
+
+    const handleItemClick = () => {
+        if (onHideDescription) {
+            onHideDescription();
+        }
+        setIsProjectsOpen(!isProjectsOpen);
+    }
 
     return (
         <div className={styles.menu}>
-            <motion.div
-                className={styles.menuItem}
-                onClick={() => setIsProjectsOpen(!isProjectsOpen)}
-                initial={{ scale: 1 }}
-                whileHover={{ scale: 1.2 }}
-            >
-                Projects
-                {isProjectsOpen && (
-                    <motion.div
-                        className={styles.projectsList}
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        exit={{ scale: 0 }}
-                        transition={{ type: 'tween', duration: 0 }}
-                    >
-                        <motion.div
-                            className={styles.projectItem}
-                            onClick={onProjectClick}
-                            initial={{ scale: 1 }}
-                            whileHover={{ scale: 1.2 }}
-                        >
-                            Project 1
-                        </motion.div>
-                        <motion.div
-                            className={styles.projectItem}
-                            onClick={onProjectClick}
-                            initial={{ scale: 1 }}
-                            whileHover={{ scale: 1.2 }}
-                        >
-                            Project 2
-                        </motion.div>
-                        <motion.div
-                            className={styles.projectItem}
-                            onClick={onProjectClick}
-                            initial={{ scale: 1 }}
-                            whileHover={{ scale: 1.2 }}
-                        >
-                            Project 3
-                        </motion.div>
-                        <motion.div
-                            className={styles.projectItem}
-                            onClick={onProjectClick}
-                            initial={{ scale: 1 }}
-                            whileHover={{ scale: 1.2 }}
-                        >
-                            Project 4
-                        </motion.div>
-                    </motion.div>
-                )}
-            </motion.div>
-            <motion.div
-                className={styles.menuItem}
-                initial={{ scale: 1 }}
-                whileHover={{ scale: 1.2 }}
-            >
-                About Me
-            </motion.div>
-            <motion.div
-                className={styles.menuItem}
-                initial={{ scale: 1 }}
-                whileHover={{ scale: 1.2 }}
-            >
-                Skills
-            </motion.div>
-            <motion.div
-                className={styles.menuItem}
-                initial={{ scale: 1 }}
-                whileHover={{ scale: 1.2 }}
-            >
-                Contact
-            </motion.div>
+            <MenuItem onClick={handleItemClick} onHideDescription={onHideDescription}>Projects</MenuItem>
+            {isProjectsOpen && <Projects onProjectClick={onProjectClick} />}
+            <MenuItem onClick={onHideDescription}>About Me</MenuItem>
+            <MenuItem onClick={onHideDescription}>Skills</MenuItem>
+            <MenuItem onClick={onHideDescription}>Contact</MenuItem>
         </div>
     );
 }
+
 export default Menu;

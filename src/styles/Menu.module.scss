@@ -11,16 +11,12 @@
     font-size: 2em;
     cursor: pointer;
     transition: all 0.3s ease;
+    max-width: 400px;  // Set a maximum width for the project cards
+    max-height: 400px;  // Set a maximum height for the project cards
+    padding: 20px;  // Add some padding inside the cards
+    overflow-wrap: break-word;  // Break the words at the edge of the card
+    word-wrap: break-word;  // Break the words at the edge of the card
+    word-break: break-word;  // Break the words at the edge of the card
 }
 
-.projectsList {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
 
-.projectItem {
-    margin: 0.5em 0;
-}

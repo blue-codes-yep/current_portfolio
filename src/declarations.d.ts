@@ -4,3 +4,7 @@ declare module '*.module.scss' {
     export default classes;
 }
 declare module 'troika-three-text';
+
+declare module '*.png';
+
+declare module 'TextGeometry.ts'

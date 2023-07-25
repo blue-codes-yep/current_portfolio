@@ -1,0 +1,29 @@
+.projectsList {
+    display: grid;  
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px; 
+    justify-content: space-between;
+    width: 65%;
+    padding: 1em;
+}
+
+.projectCard {
+    width: 50%; 
+    margin-bottom: 2em;
+    background-color: #fff;
+    padding: 1em;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.projectImage {
+    width: 100%;
+    object-fit: cover;
+}
+
+.projectDescription {
+    margin-top: 1em;
+}
+
+.projectItem {
+    margin: 0.5em 0;
+}
